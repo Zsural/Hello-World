@@ -1,20 +1,24 @@
 #include <stdio.h>
 //将五个字节的十六进制数转换成一个十进制数
-//读取原始字节数据
-char srcdata[5] = {};
-char srcdec[20] = {};
-int val;
-int i;
-char *p[] = (char*)&val;
-printf("请输入五个十六进制数据：\n");
-for(i=0;i<5;i++)
+
+void main()
 {
-  scanf("%f\n",&srcdata[i]);
+  //读取原始字节数据
+  char srcdata[5];
+  char srcdec[20];
+  int val = 0;
+  int i;
+  char *buf[] = (char*)&val;  //定义一个字符指针，同时存储val值的地址。
+  printf("请输入五个十六进制数据：\n");
+  for(i=0;i<5;i++)
+  {
+    scanf("%x\n",&srcdata[i]);
+  }
+  buf[0] = srcdata[4];
+  buf[1] = srcdata[3];
+  buf[2] = srcdata[2];
+  buf[3] = srcdata[1];
+  buf[4] = srcdata[0];
+  sprintf(srcdec, "%d", val);
+  printf("%s", srcdec);
 }
-p[0] = srcdata[4];
-p[1] = srcdata[3];
-p[2] = srcdata[2];
-p[3] = srcdata[1];
-p[4] = srcdata[0];
-sprintf(srcdec, "%d", val);
-printf("%d", srcdec);
